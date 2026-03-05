@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
 
 @layer base {
   :root {
@@ -34,7 +34,7 @@
     --input: 210 20% 90%;
     --ring: 174 62% 40%;
 
-    --radius: 0.75rem;
+    --radius: 0.875rem;
 
     --success: 152 60% 42%;
     --success-foreground: 0 0% 100%;
@@ -45,20 +45,6 @@
 
     --voice-active: 174 80% 50%;
     --voice-inactive: 210 10% 70%;
-    --voice-pulse: 174 80% 50%;
-
-    --gradient-primary: linear-gradient(135deg, hsl(174, 62%, 40%), hsl(220, 70%, 55%));
-    --gradient-hero: linear-gradient(160deg, hsl(210, 30%, 98%), hsl(174, 30%, 95%));
-    --gradient-card: linear-gradient(145deg, hsl(0, 0%, 100%), hsl(210, 20%, 98%));
-    --gradient-voice: linear-gradient(135deg, hsl(174, 80%, 50%), hsl(220, 80%, 60%));
-
-    --shadow-sm: 0 1px 3px hsl(210 20% 50% / 0.08);
-    --shadow-md: 0 4px 16px hsl(210 20% 50% / 0.1);
-    --shadow-lg: 0 8px 32px hsl(210 20% 50% / 0.12);
-    --shadow-glow: 0 0 30px hsl(174 62% 40% / 0.2);
-
-    --font-display: 'Space Grotesk', sans-serif;
-    --font-body: 'Inter', sans-serif;
 
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
@@ -115,35 +101,80 @@
 }
 
 @layer utilities {
+  .font-display {
+    font-family: 'Space Grotesk', sans-serif;
+  }
+  .font-body {
+    font-family: 'Inter', sans-serif;
+  }
+  .font-mono {
+    font-family: 'JetBrains Mono', monospace;
+  }
   .text-gradient {
-    background: var(--gradient-primary);
+    background: linear-gradient(135deg, hsl(174, 62%, 40%), hsl(220, 70%, 55%));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
   .bg-gradient-primary {
-    background: var(--gradient-primary);
+    background: linear-gradient(135deg, hsl(174, 62%, 40%), hsl(220, 70%, 55%));
   }
   .bg-gradient-hero {
-    background: var(--gradient-hero);
-  }
-  .bg-gradient-card {
-    background: var(--gradient-card);
+    background: linear-gradient(160deg, hsl(210, 30%, 98%) 0%, hsl(174, 20%, 96%) 40%, hsl(220, 20%, 96%) 100%);
   }
   .bg-gradient-voice {
-    background: var(--gradient-voice);
+    background: linear-gradient(135deg, hsl(174, 80%, 50%), hsl(220, 80%, 60%));
+  }
+  .bg-gradient-radial {
+    background: radial-gradient(ellipse at 50% 0%, hsl(174, 40%, 95%) 0%, transparent 70%);
+  }
+  .glass {
+    background: hsl(0 0% 100% / 0.7);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
+  .glass-strong {
+    background: hsl(0 0% 100% / 0.85);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
   }
   .shadow-glow {
-    box-shadow: var(--shadow-glow);
+    box-shadow: 0 0 40px hsl(174 62% 40% / 0.25), 0 0 80px hsl(174 62% 40% / 0.1);
+  }
+  .shadow-glow-sm {
+    box-shadow: 0 0 20px hsl(174 62% 40% / 0.15);
+  }
+  .shadow-soft {
+    box-shadow: 0 4px 24px hsl(210 20% 50% / 0.08), 0 1px 4px hsl(210 20% 50% / 0.04);
+  }
+  .shadow-elevated {
+    box-shadow: 0 8px 40px hsl(210 20% 50% / 0.12), 0 2px 8px hsl(210 20% 50% / 0.06);
+  }
+  .border-glass {
+    border-color: hsl(210 20% 90% / 0.6);
   }
 }
 
-@keyframes voice-pulse {
-  0%, 100% { transform: scale(1); opacity: 0.6; }
-  50% { transform: scale(1.15); opacity: 0.3; }
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
 }
 
-@keyframes waveform {
-  0%, 100% { height: 8px; }
-  50% { height: 100%; }
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes orbit {
+  0% { transform: rotate(0deg) translateX(60px) rotate(0deg); }
+  100% { transform: rotate(360deg) translateX(60px) rotate(-360deg); }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-shimmer {
+  background-size: 200% 100%;
+  animation: shimmer 3s linear infinite;
 }
